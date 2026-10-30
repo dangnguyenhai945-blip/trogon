@@ -440,41 +440,23 @@ export default function App() {
     const form = event.currentTarget
     const data = new FormData(form)
 
-    const FORM_ID = "1FAIpQLSffoPta3kW_FhF9bzf8UxvAo8kKsjLcRBTdaEfzrHzAZp-pbA"
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxLv9rek-0pH8qWn2gVrJ_WlYTcU7KBvYbHAAFacoHfltwSErh6cJZrhBSdY-VfMirz/exec"
 
-    // Dùng hidden iframe để tránh CORS hoàn toàn
-    const iframe = document.createElement("iframe")
-    iframe.name = "hidden-gform-target"
-    iframe.style.display = "none"
-    document.body.appendChild(iframe)
-
-    const hiddenForm = document.createElement("form")
-    hiddenForm.action = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`
-    hiddenForm.method = "POST"
-    hiddenForm.target = "hidden-gform-target"
-
-    const fields: Record<string, string> = {
-      "entry.872957351": (data.get("fullName") as string) ?? "",
-      "entry.1896787650": (data.get("phone") as string) ?? "",
-      "entry.1087105294": (data.get("email") as string) ?? "",
-      "entry.61568495": (data.get("rooms") as string) ?? "",
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: data.get("fullName"),
+          phone: data.get("phone"),
+          email: data.get("email"),
+          rooms: data.get("rooms"),
+        }),
+      })
+    } catch {
+      // no-cors — data vẫn được ghi vào Google Sheets
     }
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input")
-      input.type = "hidden"
-      input.name = name
-      input.value = value
-      hiddenForm.appendChild(input)
-    })
-
-    document.body.appendChild(hiddenForm)
-    hiddenForm.submit()
-
-    setTimeout(() => {
-      document.body.removeChild(hiddenForm)
-      document.body.removeChild(iframe)
-    }, 3000)
 
     setSubmitting(false)
     setSubmitted(true)
