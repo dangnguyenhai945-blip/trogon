@@ -82,3 +82,60 @@ h1 > span { color: #698b49; }
 }
 @media (max-width: 370px) { .container { width: calc(100% - 32px); }.header-cta { font-size: 8px; padding-inline: 10px; }.logo { font-size: 23px; }.hero-button { font-size: 10px; }.product-scene { transform: scale(.47); margin-bottom: -222px; }.feature-card { padding-inline: 11px; }.feature-card h3 { font-size: 10px; }.feature-bottom { font-size: 5.5px; }.feature-tag { font-size: 5.5px; }.signup-form { padding-inline: 20px; }.privacy-note { letter-spacing: -.1px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* ── Mobile & Tablet Optimization ───────────────────────────── */
+
+/* Tablet portrait: 601–900px tweaks */
+@media (max-width: 900px) and (min-width: 601px) {
+  .hero-inner { padding-block: 52px 42px; }
+  .hero { overflow-x: hidden; }
+}
+
+/* Tablet 601–768px: signup 1 cột cho thoáng */
+@media (max-width: 768px) and (min-width: 601px) {
+  .signup-layout { grid-template-columns: 1fr; gap: 32px; }
+  .signup-copy h2 { font-size: 32px; }
+  .signup-copy > p { max-width: 100%; }
+  .founder-note { max-width: 100%; }
+  .signup-form { max-width: 520px; }
+}
+
+/* Mobile ≤600px: feature grid 1 cột, font size dễ đọc hơn */
+@media (max-width: 600px) {
+  .feature-grid { grid-template-columns: 1fr; gap: 10px; }
+  .feature-card { padding: 20px 18px 16px; }
+  .feature-top { margin-bottom: 16px; }
+  .feature-icon { width: 44px; height: 44px; }
+  .feature-tag { font-size: 9px; letter-spacing: .8px; }
+  .feature-card h3 { font-size: 16px; letter-spacing: -.4px; line-height: 1.55; margin-block: 9px 10px; }
+  .feature-card > p { font-size: 12px; line-height: 1.9; margin-bottom: 16px; }
+  .feature-bottom { font-size: 10px; gap: 6px; padding-top: 14px; white-space: normal; }
+  .feature-bottom svg { width: 13px; }
+
+  /* Touch targets ≥48px cho dễ bấm */
+  .signup-form input,
+  .signup-form select { height: 50px; font-size: 13px; padding: 14px 15px; }
+  .select-wrap svg { top: 16px; }
+  .form-submit { min-height: 52px; font-size: 13px; padding-block: 16px; gap: 14px; }
+  .faq-item button { min-height: 52px; padding-block: 16px; font-size: 12px; }
+  .button { min-height: 46px; }
+  .hero-button { min-height: 52px; }
+
+  /* Perk items dễ đọc hơn */
+  .perk h3 { font-size: 13px; margin-bottom: 6px; line-height: 1.65; }
+  .perk p { font-size: 10px; }
+  .perk > span { height: 42px; width: 42px; }
+
+  /* FAQ font lớn hơn */
+  .faq-item p { font-size: 11px; line-height: 1.85; }
+}
+
+/* Điện thoại nhỏ 371–480px: căn product scene cho vừa */
+@media (max-width: 480px) and (min-width: 371px) {
+  .product-scene { transform: scale(.49); margin-bottom: -212px; }
+}
+
+/* Value strip mobile: 3 cột icon */
+@media (max-width: 600px) {
+  .value-strip-inner { grid-template-columns: repeat(3,1fr); }
+}
