@@ -1,0 +1,10 @@
+{
+  "description": "A pre-order landing page for landlords to explore TrọGọn’s rental management tools and register for early access, exclusive benefits, and simpler rent collection.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
