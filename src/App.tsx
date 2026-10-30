@@ -441,26 +441,40 @@ export default function App() {
     const data = new FormData(form)
 
     const FORM_ID = "1FAIpQLSffoPta3kW_FhF9bzf8UxvAo8kKsjLcRBTdaEfzrHzAZp-pbA"
-    const params = new URLSearchParams({
+
+    // Dùng hidden iframe để tránh CORS hoàn toàn
+    const iframe = document.createElement("iframe")
+    iframe.name = "hidden-gform-target"
+    iframe.style.display = "none"
+    document.body.appendChild(iframe)
+
+    const hiddenForm = document.createElement("form")
+    hiddenForm.action = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`
+    hiddenForm.method = "POST"
+    hiddenForm.target = "hidden-gform-target"
+
+    const fields: Record<string, string> = {
       "entry.872957351": (data.get("fullName") as string) ?? "",
       "entry.1896787650": (data.get("phone") as string) ?? "",
       "entry.1087105294": (data.get("email") as string) ?? "",
       "entry.61568495": (data.get("rooms") as string) ?? "",
+    }
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input")
+      input.type = "hidden"
+      input.name = name
+      input.value = value
+      hiddenForm.appendChild(input)
     })
 
-    try {
-      await fetch(
-        `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`,
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: params.toString(),
-        }
-      )
-    } catch {
-      // no-cors luôn trả opaque response — data vẫn được lưu
-    }
+    document.body.appendChild(hiddenForm)
+    hiddenForm.submit()
+
+    setTimeout(() => {
+      document.body.removeChild(hiddenForm)
+      document.body.removeChild(iframe)
+    }, 3000)
 
     setSubmitting(false)
     setSubmitted(true)
