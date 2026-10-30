@@ -445,6 +445,7 @@ export default function App() {
       "entry.872957351": (data.get("fullName") as string) ?? "",
       "entry.1896787650": (data.get("phone") as string) ?? "",
       "entry.1087105294": (data.get("email") as string) ?? "",
+      "entry.61568495": (data.get("rooms") as string) ?? "",
     })
 
     try {
@@ -772,9 +773,9 @@ export default function App() {
                   <option value="" disabled>
                     Chọn số lượng phòng
                   </option>
-                  <option value="under5">Dưới 5 phòng</option>
-                  <option value="5to15">5–15 phòng</option>
-                  <option value="over15">Trên 15 phòng</option>
+                  <option value="Dưới 5 phòng">Dưới 5 phòng</option>
+                  <option value="6–20 phòng">6–20 phòng</option>
+                  <option value="21–50 phòng">21–50 phòng</option>
                 </select>
                 <Icon name="chevron" size={17} />
               </div>
