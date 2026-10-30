@@ -91,6 +91,12 @@ h1 > span { color: #698b49; }
   .hero { overflow-x: hidden; }
 }
 
+/* Fix text bị cắt trên mobile — grid bị mở rộng bởi product-scene 700px */
+@media (max-width: 900px) {
+  .hero-inner { overflow: hidden; max-width: 100%; }
+  .hero-copy { min-width: 0; max-width: 100%; }
+}
+
 /* Tablet 601–768px: signup 1 cột cho thoáng */
 @media (max-width: 768px) and (min-width: 601px) {
   .signup-layout { grid-template-columns: 1fr; gap: 32px; }
