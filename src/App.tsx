@@ -187,13 +187,14 @@ const features = [
 
 function Dashboard() {
   return (
-    <div
-      className="product-scene"
-      aria-label="Minh họa giao diện quản lý TrọGọn"
-    >
-      <div className="scene-orbit orbit-one" />
-      <div className="scene-orbit orbit-two" />
-      <div className="dashboard">
+    <div className="product-scene-wrapper">
+      <div
+        className="product-scene"
+        aria-label="Minh họa giao diện quản lý TrọGọn"
+      >
+        <div className="scene-orbit orbit-one" />
+        <div className="scene-orbit orbit-two" />
+        <div className="dashboard">
         <aside className="dash-sidebar">
           <Logo small />
           <div className="property">
@@ -423,6 +424,7 @@ function Dashboard() {
       <div className="scene-caption">
         <span className="live-dot" /> Một nền tảng. Mọi thứ trong tầm tay.
       </div>
+    </div>
     </div>
   )
 }
